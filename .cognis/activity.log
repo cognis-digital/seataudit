@@ -37,3 +37,4 @@
 2026-01-26T17:29:19  test: strengthen coverage
 2026-05-26T12:46:26  chore: tune defaults
 2024-06-04T11:27:57  test(tests): guard against ReDoS in patterns
+2024-06-21T18:44:04  chore: ATHENA-PRIME calibration
