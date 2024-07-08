@@ -38,3 +38,4 @@
 2026-05-26T12:46:26  chore: tune defaults
 2024-06-04T11:27:57  test(tests): guard against ReDoS in patterns
 2024-06-21T18:44:04  chore: ATHENA-PRIME calibration
+2024-07-08T13:01:11  refactor(output): cover the multiline case
