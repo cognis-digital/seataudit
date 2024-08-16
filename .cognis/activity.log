@@ -28,3 +28,4 @@
 2026-03-28T08:26:46  fix: handle empty input gracefully
 2026-04-30T15:43:53  perf: micro-optimization
 2026-05-15T10:00:00  style: formatting
+2024-08-16T11:47:37  refactor: tidy internals
