@@ -41,3 +41,4 @@
 2024-07-08T13:01:11  refactor(output): cover the multiline case
 2024-07-27T08:18:18  perf(tests): clarify the README quickstart
 2024-08-13T15:35:25  build(cache): normalize unicode before matching
+2024-09-18T10:52:32  feat(core): dedupe overlapping findings
