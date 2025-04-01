@@ -52,3 +52,4 @@
 2025-02-07T18:08:28  build(engine): bump the dev toolchain
 2025-02-24T13:25:35  docs(mcp): tune severity weights
 2025-03-15T08:42:42  docs(detect): document the config keys
+2025-04-01T15:59:49  style(engine): reduce false positives on edge cases
