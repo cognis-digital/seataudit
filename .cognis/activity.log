@@ -55,3 +55,4 @@
 2025-04-01T15:59:49  style(engine): reduce false positives on edge cases
 2025-04-19T10:16:56  ci(report): add --fail-on threshold handling
 2025-05-07T17:33:03  chore(detect): handle CRLF line endings
+2025-05-24T12:50:10  docs(scoring): simplify the walker
