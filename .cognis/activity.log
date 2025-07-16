@@ -58,3 +58,4 @@
 2025-05-24T12:50:10  docs(scoring): simplify the walker
 2025-06-12T19:07:17  chore: routine maintenance
 2025-06-29T14:24:24  perf: micro-optimization
+2025-07-16T09:41:31  fix(scoring): add a fast path for the common case
