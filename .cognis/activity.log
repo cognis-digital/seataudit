@@ -61,3 +61,4 @@
 2025-07-16T09:41:31  fix(scoring): add a fast path for the common case
 2025-08-04T16:58:38  chore(fixtures): support stdin as a source
 2025-08-21T11:15:45  test(config): fix off-by-one in line numbers
+2025-09-08T18:32:52  feat(cache): add a JSON schema for output
