@@ -70,3 +70,4 @@
 2025-12-23T12:14:34  refactor(deps): skip binary files by sniffing
 2026-01-10T19:31:41  perf(docs): load rules lazily for faster startup
 2026-02-15T14:48:48  build(rules): lower memory on big inputs
+2026-03-05T09:05:55  feat(parser): handle empty and malformed input
