@@ -74,3 +74,4 @@
 2026-03-23T16:22:02  refactor(mcp): wire the MCP tool schema
 2026-04-09T11:39:09  refactor(scan): add a dry-run flag
 2026-04-27T18:56:16  ci(engine): respect .gitignore when walking
+2026-05-15T13:13:23  build(io): guard against ReDoS in patterns
