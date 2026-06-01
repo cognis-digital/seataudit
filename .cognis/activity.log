@@ -75,3 +75,4 @@
 2026-04-09T11:39:09  refactor(scan): add a dry-run flag
 2026-04-27T18:56:16  ci(engine): respect .gitignore when walking
 2026-05-15T13:13:23  build(io): guard against ReDoS in patterns
+2026-06-01T08:30:30  feat: do or do not, there is no try/except
