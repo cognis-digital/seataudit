@@ -1,0 +1,39 @@
+{
+  "as_of": "2026-06-08",
+  "apps": [
+    {"name": "Salesforce", "cost_per_seat": 165.0, "contracted_seats": 25, "billing": "monthly", "owner": "RevOps"},
+    {"name": "Slack", "cost_per_seat": 8.75, "contracted_seats": 40, "billing": "monthly", "owner": "IT"},
+    {"name": "Figma", "cost_per_seat": 540.0, "contracted_seats": 10, "billing": "annual", "owner": "Design"},
+    {"name": "Zoom", "cost_per_seat": 199.0, "contracted_seats": 15, "billing": "annual", "owner": "IT"},
+    {"name": "GitHub", "cost_per_seat": 21.0, "contracted_seats": 18, "billing": "monthly", "owner": "Engineering"}
+  ],
+  "seats": [
+    {"app": "Salesforce", "user": "amy@co.com", "last_active": "2026-06-06"},
+    {"app": "Salesforce", "user": "ben@co.com", "last_active": "2026-06-05"},
+    {"app": "Salesforce", "user": "cara@co.com", "last_active": "2026-05-30"},
+    {"app": "Salesforce", "user": "dan@co.com", "last_active": "2026-03-01"},
+    {"app": "Salesforce", "user": "eve@co.com", "last_active": "2026-02-10"},
+    {"app": "Salesforce", "user": "finn@co.com", "last_active": "2026-01-15"},
+    {"app": "Salesforce", "user": "gail@co.com", "last_active": null},
+    {"app": "Salesforce", "user": "hank@co.com", "last_active": "2026-06-01"},
+    {"app": "Salesforce", "user": "ivy@co.com", "last_active": "2026-06-04"},
+    {"app": "Salesforce", "user": "jon@co.com", "last_active": "2026-05-29"},
+    {"app": "Salesforce", "user": "kim@co.com", "last_active": "2026-06-07"},
+    {"app": "Salesforce", "user": "leo@co.com", "last_active": "2026-04-01"},
+    {"app": "Slack", "user": "amy@co.com", "last_active": "2026-06-08"},
+    {"app": "Slack", "user": "ben@co.com", "last_active": "2026-06-08"},
+    {"app": "Slack", "user": "cara@co.com", "last_active": "2026-06-07"},
+    {"app": "Slack", "user": "dan@co.com", "last_active": "2026-06-07"},
+    {"app": "Figma", "user": "mona@co.com", "last_active": "2026-06-06"},
+    {"app": "Figma", "user": "nina@co.com", "last_active": "2026-06-02"},
+    {"app": "Figma", "user": "otto@co.com", "last_active": "2026-01-20"},
+    {"app": "Zoom", "user": "amy@co.com", "last_active": "2026-06-05"},
+    {"app": "Zoom", "user": "ben@co.com", "last_active": "2026-02-01"},
+    {"app": "GitHub", "user": "pat@co.com", "last_active": "2026-06-08"},
+    {"app": "GitHub", "user": "quinn@co.com", "last_active": "2026-06-07"},
+    {"app": "GitHub", "user": "rosa@co.com", "last_active": "2026-06-06"},
+    {"app": "Notion", "user": "sam@co.com", "last_active": "2026-06-05"},
+    {"app": "Notion", "user": "tara@co.com", "last_active": "2026-06-01"},
+    {"app": "Grammarly", "user": "uma@co.com", "last_active": "2026-05-28"}
+  ]
+}
