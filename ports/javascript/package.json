@@ -1,0 +1,10 @@
+{
+  "name": "@cognis/seataudit",
+  "version": "0.2.0",
+  "description": "JavaScript port of seataudit (Cognis Neural Suite)",
+  "bin": {
+    "seataudit": "index.js"
+  },
+  "license": "LicenseRef-COCL-1.0",
+  "type": "module"
+}
