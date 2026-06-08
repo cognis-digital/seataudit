@@ -1,28 +1,11 @@
-"""SEATAUDIT - SaaS license, seat-usage and shadow-IT auditor.
-
-CFO-friendly auditing of SaaS spend: finds wasted seats (paid but inactive),
-over-provisioned apps, shadow-IT (apps in use but not in the sanctioned
-catalog), and quantifies the dollars you can reclaim.
-"""
-from .core import (
-    App,
-    Seat,
-    AuditResult,
-    load_inventory,
-    audit,
-    summarize,
-)
-
-TOOL_NAME = "seataudit"
-TOOL_VERSION = "1.0.0"
-
-__all__ = [
-    "App",
-    "Seat",
-    "AuditResult",
-    "load_inventory",
-    "audit",
-    "summarize",
-    "TOOL_NAME",
-    "TOOL_VERSION",
-]
+"""seataudit — part of the Cognis Neural Suite."""
+try:  # re-export the tool's public API + identity from core
+    from seataudit.core import *  # noqa: F401,F403
+except Exception:  # pragma: no cover
+    pass
+try:
+    from seataudit.core import TOOL_NAME, TOOL_VERSION
+except Exception:  # pragma: no cover
+    TOOL_NAME = "seataudit"
+    TOOL_VERSION = "0.1.0"
+__version__ = TOOL_VERSION
