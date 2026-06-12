@@ -1,6 +1,5 @@
 """Smoke tests for SEATAUDIT. Standard library only, no network."""
 import datetime as dt
-import json
 import os
 import sys
 import unittest

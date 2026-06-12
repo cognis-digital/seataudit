@@ -16,7 +16,7 @@
 </div>
 
 ```bash
-pip install cognis-seataudit
+pip install "git+https://github.com/cognis-digital/seataudit.git"
 seataudit scan .            # → prioritized findings in seconds
 ```
 
@@ -48,7 +48,7 @@ cut SaaS waste; CFO-friendly
 ## Quick start
 
 ```bash
-pip install cognis-seataudit
+pip install "git+https://github.com/cognis-digital/seataudit.git"
 seataudit --version
 seataudit scan .                       # scan current project
 seataudit scan . --format json         # machine-readable
