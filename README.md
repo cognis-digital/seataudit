@@ -16,9 +16,15 @@
 </div>
 
 ```bash
-pip install cognis-seataudit
+pip install "git+https://github.com/cognis-digital/seataudit.git"
 seataudit scan .            # → prioritized findings in seconds
 ```
+
+<!-- cognis:layman:start -->
+## What is this?
+
+SEATAUDIT is a command-line tool that scans your list of business software subscriptions and tells you exactly which paid seats are going to waste. You give it a simple inventory file listing your SaaS apps, their costs, and who is assigned to each — it then identifies inactive users, seats nobody is using, and any unsanctioned tools employees have signed up for on their own. The result is a clear, dollar-quantified report showing how much you could save on your next renewal, making it ideal for IT managers, operations teams, and CFOs who want to cut SaaS overspending without a drawn-out audit.
+<!-- cognis:layman:end -->
 
 ## Contents
 
@@ -45,10 +51,56 @@ cut SaaS waste; CFO-friendly
 <div align="right"><a href="#top">↑ back to top</a></div>
 
 <a name="quick-start"></a>
+<!-- cognis:domains:start -->
+## Domains
+
+**Primary domain:** Cyber & Security  ·  **JTF MERIDIAN division:** NULLBYTE · SPECTER
+
+**Topics:** `cognis` `security` `infosec` `cybersecurity` `blue-team`
+
+Part of the **Cognis Neural Suite** — 300+ source-available tools organized across 12 domains under the JTF MERIDIAN command structure. See the [suite on GitHub](https://github.com/cognis-digital) and [jtf-meridian](https://github.com/cognis-digital/jtf-meridian) for how the pieces fit together.
+<!-- cognis:domains:end -->
+
+<!-- cognis:install:start -->
+## Install
+
+`seataudit` is source-available (not published to PyPI) — every method below installs
+straight from GitHub. Pick whichever you prefer; the one-line scripts auto-detect
+the best tool available on your machine.
+
+**One-liner (Linux / macOS):**
+```sh
+curl -fsSL https://raw.githubusercontent.com/cognis-digital/seataudit/HEAD/install.sh | sh
+```
+
+**One-liner (Windows PowerShell):**
+```powershell
+irm https://raw.githubusercontent.com/cognis-digital/seataudit/HEAD/install.ps1 | iex
+```
+
+**Or install manually — any one of:**
+```sh
+pipx install "git+https://github.com/cognis-digital/seataudit.git"     # isolated (recommended)
+uv tool install "git+https://github.com/cognis-digital/seataudit.git"  # uv
+pip install "git+https://github.com/cognis-digital/seataudit.git"      # pip
+```
+
+**From source:**
+```sh
+git clone https://github.com/cognis-digital/seataudit.git
+cd seataudit && pip install .
+```
+
+Then run:
+```sh
+seataudit --help
+```
+<!-- cognis:install:end -->
+
 ## Quick start
 
 ```bash
-pip install cognis-seataudit
+pip install "git+https://github.com/cognis-digital/seataudit.git"
 seataudit --version
 seataudit scan .                       # scan current project
 seataudit scan . --format json         # machine-readable
