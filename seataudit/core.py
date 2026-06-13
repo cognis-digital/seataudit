@@ -157,6 +157,8 @@ def audit(
     if as_of is None:
         as_of = _parse_date(inventory.get("as_of")) or _dt.date.today()
 
+    if "seats" not in inventory:
+        raise ValueError("inventory must contain a 'seats' key")
     apps = _build_apps(inventory["apps"])
     seats = _build_seats(inventory["seats"])
 

@@ -20,6 +20,12 @@ pip install "git+https://github.com/cognis-digital/seataudit.git"
 seataudit scan .            # → prioritized findings in seconds
 ```
 
+<!-- cognis:layman:start -->
+## What is this?
+
+SEATAUDIT is a command-line tool that scans your list of business software subscriptions and tells you exactly which paid seats are going to waste. You give it a simple inventory file listing your SaaS apps, their costs, and who is assigned to each — it then identifies inactive users, seats nobody is using, and any unsanctioned tools employees have signed up for on their own. The result is a clear, dollar-quantified report showing how much you could save on your next renewal, making it ideal for IT managers, operations teams, and CFOs who want to cut SaaS overspending without a drawn-out audit.
+<!-- cognis:layman:end -->
+
 ## Contents
 
 - [Why seataudit?](#why) · [Features](#features) · [Quick start](#quick-start) · [Example](#example) · [Architecture](#architecture) · [AI stack](#ai-stack) · [How it compares](#how-it-compares) · [Integrations](#integrations) · [Install anywhere](#install-anywhere) · [Related](#related) · [Contributing](#contributing)
@@ -45,6 +51,42 @@ cut SaaS waste; CFO-friendly
 <div align="right"><a href="#top">↑ back to top</a></div>
 
 <a name="quick-start"></a>
+<!-- cognis:install:start -->
+## Install
+
+`seataudit` is source-available (not published to PyPI) — every method below installs
+straight from GitHub. Pick whichever you prefer; the one-line scripts auto-detect
+the best tool available on your machine.
+
+**One-liner (Linux / macOS):**
+```sh
+curl -fsSL https://raw.githubusercontent.com/cognis-digital/seataudit/HEAD/install.sh | sh
+```
+
+**One-liner (Windows PowerShell):**
+```powershell
+irm https://raw.githubusercontent.com/cognis-digital/seataudit/HEAD/install.ps1 | iex
+```
+
+**Or install manually — any one of:**
+```sh
+pipx install "git+https://github.com/cognis-digital/seataudit.git"     # isolated (recommended)
+uv tool install "git+https://github.com/cognis-digital/seataudit.git"  # uv
+pip install "git+https://github.com/cognis-digital/seataudit.git"      # pip
+```
+
+**From source:**
+```sh
+git clone https://github.com/cognis-digital/seataudit.git
+cd seataudit && pip install .
+```
+
+Then run:
+```sh
+seataudit --help
+```
+<!-- cognis:install:end -->
+
 ## Quick start
 
 ```bash
