@@ -6,8 +6,7 @@ import json
 import sys
 from typing import List, Optional
 
-from . import TOOL_NAME, TOOL_VERSION
-from .core import audit, load_inventory, summarize
+from .core import TOOL_NAME, TOOL_VERSION, audit, load_inventory, summarize
 
 
 def _fmt_money(v: float) -> str:
@@ -36,6 +35,19 @@ def _print_table(result, summary) -> None:
         print(f"Shadow-IT apps      : {', '.join(result.shadow_it)}")
 
 
+def _nonneg_int(value: str) -> int:
+    """argparse type: integer >= 0."""
+    try:
+        v = int(value)
+    except ValueError:
+        raise argparse.ArgumentTypeError(f"expected an integer, got {value!r}")
+    if v < 0:
+        raise argparse.ArgumentTypeError(
+            f"--inactive-days must be >= 0, got {v}"
+        )
+    return v
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
         prog=TOOL_NAME,
@@ -47,7 +59,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     a = sub.add_parser("audit", help="audit a SaaS inventory for seat waste")
     a.add_argument("inventory", help="path to inventory JSON file")
-    a.add_argument("--inactive-days", type=int, default=45,
+    a.add_argument("--inactive-days", type=_nonneg_int, default=45,
                    help="days idle before a seat is reclaimable (default 45)")
     a.add_argument("--format", choices=("table", "json"), default="table")
     a.add_argument("--summary", action="store_true",

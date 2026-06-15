@@ -1,6 +1,11 @@
-"""SEATAUDIT MCP server — exposes scan() as an MCP tool for Cognis.Studio."""
+"""SEATAUDIT MCP server — exposes audit() as an MCP tool for Cognis.Studio."""
 from __future__ import annotations
-from seataudit.core import scan, to_json
+
+import json
+import sys
+
+from seataudit.core import audit, load_inventory
+
 
 def serve() -> int:
     """Start an MCP stdio server. Requires the optional 'mcp' extra:
@@ -14,9 +19,27 @@ def serve() -> int:
     app = FastMCP("seataudit")
 
     @app.tool()
-    def seataudit_scan(target: str) -> str:
-        """SaaS license, seat-usage and shadow-IT auditor. Returns JSON findings."""
-        return to_json(scan(target))
+    def seataudit_scan(inventory_path: str) -> str:
+        """SaaS license, seat-usage and shadow-IT auditor.
+
+        Args:
+            inventory_path: Path to a JSON inventory file.
+
+        Returns:
+            JSON string with full audit findings.
+        """
+        try:
+            inv = load_inventory(inventory_path)
+        except FileNotFoundError:
+            return json.dumps({"error": f"inventory file not found: {inventory_path}"})
+        except (ValueError, json.JSONDecodeError) as exc:
+            return json.dumps({"error": f"invalid inventory: {exc}"})
+        result = audit(inv)
+        return json.dumps(result.to_dict(), indent=2)
 
     app.run()
     return 0
+
+
+if __name__ == "__main__":
+    sys.exit(serve())

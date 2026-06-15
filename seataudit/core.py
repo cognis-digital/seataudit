@@ -15,8 +15,13 @@ import json
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 
+TOOL_NAME = "seataudit"
+TOOL_VERSION = "0.1.0"
+
 # A seat is considered "stale" / reclaimable once it has been inactive this long.
 DEFAULT_INACTIVE_DAYS = 45
+
+_VALID_BILLING = {"monthly", "annual"}
 
 
 def _parse_date(value: Optional[str]) -> Optional[_dt.date]:
@@ -117,31 +122,90 @@ def load_inventory(path: str) -> Dict[str, Any]:
         raise ValueError("inventory must be a JSON object")
     if "apps" not in data or "seats" not in data:
         raise ValueError("inventory must contain 'apps' and 'seats' keys")
+    if not isinstance(data["apps"], list):
+        raise ValueError("'apps' must be a list")
+    if not isinstance(data["seats"], list):
+        raise ValueError("'seats' must be a list")
     return data
 
 
 def _build_apps(raw_apps: List[Dict[str, Any]]) -> Dict[str, App]:
     apps: Dict[str, App] = {}
-    for a in raw_apps:
-        name = a["name"]
+    for i, a in enumerate(raw_apps):
+        if not isinstance(a, dict):
+            raise ValueError(f"apps[{i}] must be an object")
+        if "name" not in a or not str(a["name"]).strip():
+            raise ValueError(f"apps[{i}] is missing a non-empty 'name' field")
+        if "cost_per_seat" not in a:
+            raise ValueError(f"apps[{i}] ({a['name']!r}) is missing 'cost_per_seat'")
+        name = str(a["name"]).strip()
+        try:
+            cost = float(a["cost_per_seat"])
+        except (TypeError, ValueError):
+            raise ValueError(
+                f"apps[{i}] ({name!r}): 'cost_per_seat' must be a number, "
+                f"got {a['cost_per_seat']!r}"
+            )
+        if cost < 0:
+            raise ValueError(
+                f"apps[{i}] ({name!r}): 'cost_per_seat' must be >= 0, got {cost}"
+            )
+        try:
+            contracted = int(a.get("contracted_seats", 0))
+        except (TypeError, ValueError):
+            raise ValueError(
+                f"apps[{i}] ({name!r}): 'contracted_seats' must be an integer"
+            )
+        if contracted < 0:
+            raise ValueError(
+                f"apps[{i}] ({name!r}): 'contracted_seats' must be >= 0"
+            )
+        billing = a.get("billing", "monthly")
+        if billing not in _VALID_BILLING:
+            raise ValueError(
+                f"apps[{i}] ({name!r}): 'billing' must be one of "
+                f"{sorted(_VALID_BILLING)}, got {billing!r}"
+            )
+        if name in apps:
+            raise ValueError(f"duplicate app name: {name!r}")
         apps[name] = App(
             name=name,
-            cost_per_seat=float(a["cost_per_seat"]),
-            contracted_seats=int(a.get("contracted_seats", 0)),
-            billing=a.get("billing", "monthly"),
-            owner=a.get("owner", ""),
+            cost_per_seat=cost,
+            contracted_seats=contracted,
+            billing=billing,
+            owner=str(a.get("owner", "")),
         )
     return apps
 
 
 def _build_seats(raw_seats: List[Dict[str, Any]]) -> List[Seat]:
     seats: List[Seat] = []
-    for s in raw_seats:
+    for i, s in enumerate(raw_seats):
+        if not isinstance(s, dict):
+            raise ValueError(f"seats[{i}] must be an object")
+        if "app" not in s or not str(s.get("app", "")).strip():
+            raise ValueError(f"seats[{i}] is missing a non-empty 'app' field")
+        if "user" not in s or not str(s.get("user", "")).strip():
+            raise ValueError(f"seats[{i}] is missing a non-empty 'user' field")
+        try:
+            last_active = _parse_date(s.get("last_active"))
+        except ValueError as exc:
+            raise ValueError(
+                f"seats[{i}] (app={s['app']!r}, user={s['user']!r}): "
+                f"invalid last_active: {exc}"
+            )
+        try:
+            assigned = _parse_date(s.get("assigned"))
+        except ValueError as exc:
+            raise ValueError(
+                f"seats[{i}] (app={s['app']!r}, user={s['user']!r}): "
+                f"invalid assigned: {exc}"
+            )
         seats.append(Seat(
-            app=s["app"],
-            user=s["user"],
-            last_active=_parse_date(s.get("last_active")),
-            assigned=_parse_date(s.get("assigned")),
+            app=str(s["app"]).strip(),
+            user=str(s["user"]).strip(),
+            last_active=last_active,
+            assigned=assigned,
         ))
     return seats
 
@@ -157,10 +221,18 @@ def audit(
     if as_of is None:
         as_of = _parse_date(inventory.get("as_of")) or _dt.date.today()
 
+    if "apps" not in inventory:
+        raise ValueError("inventory must contain an 'apps' key")
     if "seats" not in inventory:
         raise ValueError("inventory must contain a 'seats' key")
-    apps = _build_apps(inventory["apps"])
-    seats = _build_seats(inventory["seats"])
+    raw_apps = inventory["apps"]
+    raw_seats = inventory["seats"]
+    if not isinstance(raw_apps, list):
+        raise ValueError("'apps' must be a list")
+    if not isinstance(raw_seats, list):
+        raise ValueError("'seats' must be a list")
+    apps = _build_apps(raw_apps)
+    seats = _build_seats(raw_seats)
 
     # Group seats by app
     by_app: Dict[str, List[Seat]] = {}
