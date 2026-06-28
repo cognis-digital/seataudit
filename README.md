@@ -42,6 +42,62 @@ seataudit scan .            # → prioritized findings in seconds
 
 
 
+
+<!-- cognis:example:start -->
+## 🔎 Example output
+
+Real, reproducible output from the tool — runs offline:
+
+```console
+$ seataudit-emit --version
+seataudit 0.1.0
+```
+
+```console
+$ seataudit-emit --help
+usage: seataudit [-h] [--version] {audit} ...
+
+SaaS license, seat-usage and shadow-IT auditor.
+
+positional arguments:
+  {audit}
+    audit     audit a SaaS inventory for seat waste
+
+options:
+  -h, --help  show this help message and exit
+  --version   show program's version number and exit
+```
+
+> Blocks above are real `seataudit` output — reproduce them from a clone.
+
+**Sample result format** _(illustrative values — run on your own data for real findings):_
+
+```
+{
+"timestamp": "2023-02-16T14:30:00Z",
+"findings": [
+  {
+    "id": "1234567890",
+    "title": "Suspicious Network Traffic",
+    "description": "Potential malicious activity detected on network interface eth0.",
+    "severity": "high",
+    "mitre_attack_id": ["T1003"],
+    "ttp_stix_ids": ["attack-pattern--1-2-3"]
+  },
+  {
+    "id": "2345678901",
+    "title": "Unusual File Access",
+    "description": "User 'johndoe' accessed file '/path/to/suspicious/file' with unusual frequency.",
+    "severity": "medium",
+    "mitre_attack_id": ["T1053"],
+    "ttp_stix_ids": ["attack-pattern--2-3-4"]
+  }
+]
+}
+```
+
+<!-- cognis:example:end -->
+
 ## Contents
 
 

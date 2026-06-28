@@ -1,0 +1,13 @@
+$ seataudit-emit --help
+
+usage: seataudit [-h] [--version] {audit} ...
+
+SaaS license, seat-usage and shadow-IT auditor.
+
+positional arguments:
+  {audit}
+    audit     audit a SaaS inventory for seat waste
+
+options:
+  -h, --help  show this help message and exit
+  --version   show program's version number and exit
